@@ -1,0 +1,53 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Setup Chrome Driver
+        uses: nanasess/setup-chromedriver@v1
+
+      - name: Start Chrome Driver
+        run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Rake
+        env:
+          HANAMI_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+        run: |
+          bin/hanami db create
+          bin/hanami db migrate
+          bundle exec rake
+
+      - name: Archive SimpleCov Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage

@@ -1,0 +1,57 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: ~/project
+    docker:
+      - image: bkuhlmann/alpine-ruby:latest
+        environment:
+          HANAMI_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      - image: postgres:latest
+        environment:
+          POSTGRES_PASSWORD: postgres
+    steps:
+      - run:
+          name: Install Chromium
+          command: apk add chromium chromium-chromedriver
+
+      - run:
+          name: Start Chromium
+          command: |
+            export DISPLAY=:99
+            chromedriver --url-base=/wd/hub &
+
+      - checkout
+
+      - restore_cache:
+          name: Bundler Restore
+          keys:
+            - gem-cache-{{.Branch}}-{{checksum "Gemfile.lock"}}
+            - gem-cache-
+
+      - run:
+          name: Bundler Install
+          command: |
+            gem update --system
+            bundle config set path "vendor/bundle"
+            bundle install
+
+      - save_cache:
+          name: Bundler Store
+          key: gem-cache-{{.Branch}}-{{checksum "Gemfile.lock"}}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Database Setup
+          command: |
+            bin/hanami db migrate
+
+      - run:
+          name: Build
+          command: bundle exec rake
+
+      - store_artifacts:
+          name: SimpleCov Artifacts Upload
+          path: ~/project/coverage
+          destination: coverage
