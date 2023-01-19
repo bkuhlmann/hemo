@@ -1,0 +1,52 @@
+<li class="<%= task.css_class %>" hx-target="closest li" hx-swap="outerHTML swap:0s">
+  <form class="body" action="/tasks/<%= task.id %>" method="put" hx-put="/tasks/<%= task.id %>">
+    <div class="item">
+      <input id="complete"
+             name="task[completed]"
+             type="checkbox"
+             <%= task.checked %>
+             autocomplete="off"/>
+
+      <% if error.key? :description %>
+        <div class="group error">
+          <input id="description"
+                 name="task[description]"
+                 value="<%= task.description %>"
+                 class="input"
+                 autocomplete="on"/>
+
+          <p class="message"><%= error_description %></p>
+        </div>
+      <% else %>
+        <input id="description"
+               name="task[description]"
+               value="<%= task.description %>"
+               class="input"
+               autocomplete="on"
+               hx-trigger="keyup[code == 'Enter']"/>
+      <% end %>
+    </div>
+
+    <select id="task_owner" name="task[user_id]" class="select">
+      <% users.each do |user| %>
+        <option value="<%= user.id %>"><%= user.name %></option>
+      <% end %>
+    </select>
+
+    <span class="actions">
+      <input name="commit"
+             type="submit"
+             value="Save"
+             class="button button-accept"
+             hx-trigger="click"
+             data-disable-with="Save"/>
+
+      <a href="/tasks"
+         class="button button-decline"
+         hx-trigger="keyup[code == 'Escape'] from:li"
+         hx-get="/tasks/<%= task.id %>">
+        Cancel
+      </a>
+    </span>
+  </form>
+</li>
