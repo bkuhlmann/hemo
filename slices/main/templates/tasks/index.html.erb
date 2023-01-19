@@ -1,0 +1,26 @@
+<header>
+  <details class="site-shortcuts">
+    <summary>Tasks</summary>
+
+    <h4>Keyboard Shortcuts</h4>
+
+    <ul>
+      <li><kbd>Enter</kbd> (edit): Hover over any field and hit <kbd>Enter</kbd> to edit.</li>
+      <li><kbd>Enter</kbd> (save): Hit <kbd>Enter</kbd> to save any field being edited.</li>
+    </ul>
+  </details>
+</header>
+
+<main class="tasks-page">
+  <% if tasks.empty? %>
+    <p id="congratulations" class="empty">☀️ Congratulations, all tasks are complete!</p>
+  <% end %>
+
+  <ul class="tasks">
+    <% tasks.each do |task| %>
+      <%= task.render :task %>
+    <% end %>
+  </ul>
+
+  <%= new_link %>
+</main>
