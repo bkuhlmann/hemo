@@ -1,0 +1,53 @@
+<span id="congratulations" hx-swap-oob="true"></span>
+
+<li class="task task-new">
+  <form class="body" action="/tasks" method="post">
+    <div class="field">
+      <label class="label" for="task_description">Description</label>
+
+      <% if error.key? :description %>
+        <div class="group error">
+          <input id="task_description"
+                 name="task[description]"
+                 class="input"
+                 type="text"
+                 autocomplete="on"/>
+          <p class="message"><%= error_description %></p>
+        </div>
+      <% else %>
+        <input id="task_description" name="task[description]" class="input" autocomplete="on"/>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <label class="label" for="task_owner">Owner</label>
+
+      <select id="task_owner" name="task[user_id]" class="select">
+        <% users.each do |user| %>
+          <option value="<%= user.id %>"><%= user.name %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="actions">
+      <input name="commit"
+             type="submit"
+             value="Save"
+             class="button button-accept"
+             hx-trigger="click"
+             hx-target="closest .task"
+             hx-swap="outerHTML swap:0s"
+             hx-post="/tasks"
+             data-disable-with="Save"/>
+
+      <a href="/tasks"
+         class="button button-decline"
+         hx-trigger="click"
+         hx-target="closest .task"
+         hx-swap="delete swap:0.5s"
+         hx-get="/tasks/new">
+       Cancel
+     </a>
+    </div>
+  </form>
+</li>
