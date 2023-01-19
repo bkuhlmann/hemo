@@ -1,0 +1,20 @@
+<span id="congratulations" hx-swap-oob="true"></span>
+
+<li class="task task-new" hx-ext="remove">
+  <form class="body" action="/tasks" method="post">
+    <div class="field">
+      <label class="label" for="task_description">Description</label>
+      <%= scope(:description, content: "", error:).render %>
+    </div>
+
+    <div class="field">
+      <label class="label" for="task_owner">Owner</label>
+      <%= render :users %>
+    </div>
+
+    <div class="actions">
+      <%= create_save_button %>
+      <%= create_cancel_link %>
+    </div>
+  </form>
+</li>
