@@ -1,0 +1,20 @@
+<li class="<%= task.css_class %>" hx-target="closest li" hx-swap="outerHTML swap:0s">
+  <form class="body" action="/tasks/<%= task.id %>" method="put" hx-put="/tasks/<%= task.id %>">
+    <div class="item">
+      <input id="complete"
+             name="task[completed]"
+             type="checkbox"
+             <%= task.checked %>
+             autocomplete="off"/>
+
+      <%= scope(:description, content: task.description, error:).render %>
+    </div>
+
+    <%= render :users %>
+
+    <span class="actions">
+      <%= edit_save_button %>
+      <%= edit_cancel_link task.id %>
+    </span>
+  </form>
+</li>
