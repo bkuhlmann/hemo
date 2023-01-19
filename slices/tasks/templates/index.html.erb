@@ -1,0 +1,21 @@
+<header class="header">
+  <h1 class="label">
+    <a href="/">Home</a>
+    <span> | </span>
+    <a href="/tasks">Tasks</a>
+  </h1>
+
+  <%= render :search %>
+</header>
+
+<main class="body">
+  <% if tasks.empty? %>
+    <p id="congratulations" class="empty">☀️ Congratulations, all tasks are complete!</p>
+  <% end %>
+
+  <ul class="tasks">
+    <%= render :rows, tasks: %>
+  </ul>
+
+  <%= new_link %>
+</main>
