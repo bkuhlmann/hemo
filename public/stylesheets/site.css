@@ -1,12 +1,205 @@
 :root {
   --site-font-family: Verdana;
+  --site-color-black: hsl(0, 0%, 0%);
+  --site-color-white: hsl(0, 0%, 100%);
+  --site-color-grey: hsl(0, 0%, 85%);
+  --site-color-green: hsl(122, 45%, 45%);
+  --site-color-powder: hsl(201, 70%, 96%);
+  --site-color-red: hsl(5, 69%, 46%);
+}
+
+kbd {
+  background-color: var(--site-color-grey);
+  border-radius: 0.2rem;
+  border: 0.1rem solid var(--site-color-grey);
+  color: var(--site-color-black);
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1rem;
+  padding: 0.1rem 0.3rem;
+  white-space: nowrap;
+}
+
+
+[hx-swap-oob="true"] {
+  display: none;
+}
+
+.button {
+  border-radius: 0.5rem;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  justify-self: start;
+  margin: 0;
+  padding:  0.2rem 0.5rem;
+  text-decoration: none;
+}
+
+.button-accept {
+  background-color: var(--site-color-green);
+  color:  var(--site-color-white);
+}
+
+.button-decline {
+  background-color: var(--site-color-red);
+  color:  var(--site-color-white);
+}
+
+.button-plain {
+  background-color: var(--site-color-white);
+  color:  var(--site-color-black);
 }
 
 .page {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   font-family: var(--site-font-family);
   margin: 1rem 5rem;
+}
+
+.site-shortcuts {
+  margin: 2rem 0;
+}
+
+.site-shortcuts summary {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.tasks-page, .tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tasks {
+  gap: 1rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tasks-page .empty {
+  align-items:  center;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+}
+
+.tasks-page .new {
+  align-self: flex-start;
+}
+
+.task {
+  background-color: var(--site-color-powder);
+  border-radius: 0.5rem;
+  box-shadow:
+    0.7px 0.5px 5.3px rgba(0, 0, 0, 0.028),
+    2.2px 1.8px 17.9px rgba(0, 0, 0, 0.042),
+    10px 8px 80px rgba(0, 0, 0, 0.07)
+  ;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.task-new.htmx-swapping {
+  opacity: 100;
+  transition: opacity 1s ease-in;
+}
+
+.task-new.htmx-added {
+  opacity: 0;
+}
+
+.task-new {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.task-completed {
+  background-color: var(--site-color-grey);
+}
+
+.task-completed .item {
+  text-decoration: line-through;
+}
+
+.task.htmx-swapping {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+.task .body {
+  align-items: center;
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 1fr;
+  justify-content: space-between;
+}
+
+.task .body .group {
+  display: flex;
+  flex-direction: column;
+}
+
+.task .body .group .error {
+  color: var(--site-color-white);
+  margin: 0;
+}
+
+.task .body .item {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task .body .check {
+  background: none;
+  border: none;
+}
+
+.task .body .label {
+  font-weight: 800;
+}
+
+.task .body .label:after {
+  content: ":";
+  padding: 0 0.5rem 0 0;
+}
+
+.task .body .field {
+  align-items: center;
+  display: flex;
+  font-size: 1rem;
+  gap: 0.5rem;
+}
+
+.task .body .input {
+  font-size: 1rem;
+  border: 0.1rem solid var(--site-color-grey);
+}
+
+.task .body .select {
+  font-size: 1rem;
+  background-color: var(--site-color-white);
+  border: 0.1rem solid var(--site-color-grey);
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.task .body .actions {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.task. .body .error .input {
+  border: 0.2rem solid var(--site-color-red);
+}
+
+.task .body .error .message {
+  background-color: var(--site-color-red);
+  color:  var(--site-color-white);
+  margin: 0;
+  padding: 0.1rem 0.2rem;
 }
 
