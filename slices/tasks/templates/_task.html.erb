@@ -1,0 +1,28 @@
+<li id="<%= task.id %>" class="<%= task.css_class %>" hx-target="this" hx-swap="outerHTML">
+  <div class="body">
+    <div class="item">
+      <input id="complete"
+             name="task[completed]"
+             type="checkbox"
+             <%= task.checked %>
+             autocomplete="off"
+             hx-patch="/tasks/<%= task.id %>"/>
+
+      <span name="task[description]" hx-trigger="click" hx-get="/tasks/<%= task.id %>/edit">
+        <%= task.description %>
+      </span>
+    </div>
+
+    <div hx-trigger="click" hx-get="/tasks/<%= task.id %>/edit">
+      <%= task.assignee %>
+    </div>
+
+    <div class="actions">
+      <%= edit_link task.id %>
+
+      <form method="post" action="/tasks/<%= task.id %>">
+        <%= delete_button task.id %>
+      </form>
+    </div>
+  </div>
+</li>
