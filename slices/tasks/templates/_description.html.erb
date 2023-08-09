@@ -1,0 +1,8 @@
+<% if error.key? :description %>
+  <div class="group error">
+    <input name="task[description]" class="input" type="text" autocomplete="on"/>
+    <p class="message"><%= message %></p>
+  </div>
+<% else %>
+  <input name="task[description]" value="<%= value %>" class="input" autocomplete="on"/>
+<% end %>
