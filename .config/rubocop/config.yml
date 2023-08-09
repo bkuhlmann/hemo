@@ -2,3 +2,7 @@ inherit_gem:
   caliber: config/all.yml
 
 plugins: rubocop-sequel
+
+Metrics/MethodLength:
+  Exclude:
+    - "slices/tasks/views/helpers.rb"
