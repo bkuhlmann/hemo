@@ -1,0 +1,5 @@
+<select name="task[user_id]" class="select">
+  <% users.each do |user| %>
+    <option value="<%= user.id %>"><%= user.name %></option>
+  <% end %>
+</select>
