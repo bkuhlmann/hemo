@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+    <title>Tasks | Hemo</title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="A Hanami demonstration application.">
+    <meta name="author" content="Alchemists">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="htmx-config" content='{"selfRequestsOnly":true}'>
+
+    <link title="Hemo: Favorite Icon"
+          rel="icon"
+          href="https://alchemists.io/images/projects/hanamismith/icons/favicon.ico"
+          sizes="32x32">
+    <%= favicon_tag app_assets["icon.svg"], title: "Hemo: Icon", rel: :icon, type: "image/svg+xml" %>
+    <link title="Hemo: Apple Icon"
+          rel="apple-touch-icon"
+          href="https://alchemists.io/images/projects/hanamismith/icons/apple.png"
+          type="image/png">
+    <%= tag.link title: "Hemo: Manifest", rel: :manifest, href: app_assets["manifest.webmanifest"] %>
+    <%= stylesheet_tag "app", title: "Hemo: Stylesheet" %>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "htmx": "https://unpkg.com/htmx.org@1.9",
+          "htmx-remove": "https://unpkg.com/htmx-remove@1.1"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import * as htmx from "htmx";
+      import * as htmx_remove from "htmx-remove";
+    </script>
+  </head>
+
+  <body class="tasks-page">
+    <%= yield %>
+  </body>
+</html>
