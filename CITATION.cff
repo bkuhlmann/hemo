@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: Please use the following metadata when citing this project in your work.
+title: Hemo
+abstract:
+version: 0.0.0
+license: Hippocratic-2.1
+date-released: 2024-03-02
+authors:
+  - family-names: Kuhlmann
+    given-names: Brooke
+    affiliation: Alchemists
+    orcid: https://orcid.org/0000-0002-5810-6268
+keywords:
+ - ruby
+repository-code: https://github.com/bkuhlmann/hemo
+repository-artifact: https://github.com/bkuhlmann/hemo
+url: https://github.com/bkuhlmann/hemo
