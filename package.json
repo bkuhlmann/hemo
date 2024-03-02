@@ -1,0 +1,13 @@
+{
+  "name": "hemo",
+  "description": "",
+  "version": "0.0.0",
+  "author": "Brooke Kuhlmann",
+  "license": "Hippocratic-2.1",
+  "private": true,
+  "type": "module",
+  "keywords": ["ruby", "hanami"],
+  "dependencies": {
+    "hanami-assets": "^2.2.0"
+  }
+}
