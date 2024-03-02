@@ -1,0 +1,21 @@
+{
+  "name": "Hemo",
+  "short_name": "Hemo",
+  "description": "A Hanamismith skeleton application.",
+  "icons": [
+    {
+      "src": "https://alchemists.io/images/projects/hanamismith/icons/small.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://alchemists.io/images/projects/hanamismith/icons/large.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "theme_color": "#000000"
+}
