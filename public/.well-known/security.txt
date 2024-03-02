@@ -1,0 +1,7 @@
+Contact: https://alchemists.io/policies/security
+Encryption: https://alchemists.io/keybase.txt
+Policy: https://alchemists.io/policies/security
+Preferred-Languages: en
+Canonical: https://alchemists.io/.well-known/security.txt
+Permission: none
+Expires: 2026-06-15T22:00:00z

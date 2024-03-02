@@ -1,0 +1,71 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      HANAMI_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: System Update
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y curl libjemalloc2
+
+      - name: Chromium Setup
+        uses: nanasess/setup-chromedriver@v2
+
+      - name: Chromium Start
+        run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{github.head_ref}}
+
+      - name: Ruby Setup
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Node Setup
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+
+      - name: Packages Install
+        run: npm install
+
+      - name: Database Setup
+        run: bin/hanami db prepare
+
+      - name: Build
+        run: |
+          bin/hanami assets compile
+          bundle exec rake
+
+      - name: SimpleCov Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage
