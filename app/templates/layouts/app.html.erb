@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+    <title><%= content_for :title %></title>
+
+    <meta charset="utf-8">
+    <meta name="description" content="A Hanamismith skeleton application.">
+    <meta name="author" content="Hanamismith">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="view-transition" content="same-origin">
+
+    <link title="Hemo: Favicon"
+          rel="icon"
+          href="https://alchemists.io/images/projects/hanamismith/icons/favicon.ico"
+          sizes="32x32">
+    <%= tag.link title: "Hemo: Icon",
+                 rel: :icon,
+                 href: app_assets["icon.svg"],
+                 type: "image/svg+xml" %>
+    <link title="Hemo: Apple Icon"
+          rel="apple-touch-icon"
+          href="https://alchemists.io/images/projects/hanamismith/icons/apple.png"
+          type="image/png">
+    <%= tag.link title: "Hemo: Manifest",
+                 rel: :manifest,
+                 href: app_assets["manifest.webmanifest"] %>
+
+    <%= tag.link title: "Hemo: Stylesheet", rel: :stylesheet, href: app_assets["app.css"] %>
+  </head>
+
+  <body class="home-page">
+    <%= yield %>
+  </body>
+</html>

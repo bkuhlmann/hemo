@@ -1,0 +1,26 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "debug"
+require "fileutils"
+require "pathname"
+
+APP_ROOT = Pathname(__dir__).join("..").expand_path
+
+Runner = lambda do |*arguments, kernel: Kernel|
+  kernel.system(*arguments) || kernel.abort("\nERROR: Command #{arguments.inspect} failed.")
+end
+
+FileUtils.chdir APP_ROOT do
+  puts "Installing gem dependencies..."
+  Runner.call "bundle install"
+
+  puts "Installing package dependencies..."
+  Runner.call "npm install"
+
+  puts "Creating and migrating databases..."
+  Runner.call "hanami db prepare"
+
+  puts "Compiling assets..."
+  Runner.call "hanami assets compile"
+end
