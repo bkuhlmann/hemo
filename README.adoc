@@ -1,0 +1,72 @@
+:toc: macro
+:toclevels: 5
+:figure-caption!:
+
+= Hemo
+
+toc::[]
+
+== Features
+
+== Screencasts
+
+== Requirements
+
+. link:https://www.ruby-lang.org[Ruby].
+
+== Setup
+
+To set up the project, run:
+
+[source,bash]
+----
+git clone https://github.com/bkuhlmann/hemo
+cd hemo
+bin/setup
+----
+
+== Usage
+
+== Development
+
+To contribute, run:
+
+[source,bash]
+----
+git clone https://github.com/bkuhlmann/hemo
+cd hemo
+bin/setup
+----
+
+You can also use the IRB console for direct access to all objects:
+
+[source,bash]
+----
+bin/console
+----
+
+== Tests
+
+To test, run:
+
+[source,bash]
+----
+bin/rake
+----
+
+== link:https://alchemists.io/policies/license[License]
+
+== link:https://alchemists.io/policies/security[Security]
+
+== link:https://alchemists.io/policies/code_of_conduct[Code of Conduct]
+
+== link:https://alchemists.io/policies/contributions[Contributions]
+
+== link:https://alchemists.io/policies/developer_certificate_of_origin[Developer Certificate of Origin]
+
+== link:https://alchemists.io/community[Community]
+
+== Credits
+
+* Built with link:https://alchemists.io/projects/hanamismith[Hanamismith].
+* Engineered by link:https://alchemists.io/team/brooke_kuhlmann[Brooke Kuhlmann].
