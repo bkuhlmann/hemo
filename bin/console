@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+Bundler.require :tools
+
+require "hanami/prepare"
+require "irb"
+
+unless Hanami.env? :development, :test
+  ENV["IRB_USE_AUTOCOMPLETE"] ||= "false"
+  puts "IRB autocomplete disabled."
+end
+
+IRB.start __FILE__
