@@ -1,0 +1,36 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "fileutils"
+require "pathname"
+
+APP_ROOT = Pathname(__dir__).join("..").expand_path
+
+class Deployer
+  def initialize kernel: Kernel
+    @kernel = kernel
+  end
+
+  def run(*arguments)
+    kernel.system(*arguments) || kernel.abort("\nERROR: Command #{arguments.inspect} failed.")
+  end
+
+  def try(*arguments)
+    warn "#{arguments} did not complete." unless kernel.system(*arguments)
+  end
+
+  private
+
+  attr_reader :kernel
+end
+
+deployer = Deployer.new
+
+FileUtils.chdir APP_ROOT do
+  deployer.run "bundle config set without 'quality development test tools'"
+  deployer.run "bundle install"
+  deployer.run "npm install"
+  deployer.try "bin/hanami db setup"
+  deployer.try "bin/hanami db seed"
+  deployer.try "bin/hanami assets compile"
+end
