@@ -1,0 +1,18 @@
+services:
+  - type: web
+    plan: free
+    name: hemo
+    env: ruby
+    buildCommand: "./bin/render-build"
+    startCommand: "bundle exec puma --config config/puma.rb"
+    envVars:
+      - key: HANAMI_ENV
+        value: production
+      - key: HANAMI_PORT
+        value: 3000
+      - key: PORT
+        value: 3000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hemo
+          property: connectionString
