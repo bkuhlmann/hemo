@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+IFS=$'\n\t'
+
+bundle config set --local without "development,test,quality,tools"
+bundle install
+npm install
+bin/hanami db setup
+bin/hanami db seed
+bin/hanami assets compile
