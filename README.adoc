@@ -2,17 +2,40 @@
 :toclevels: 5
 :figure-caption!:
 
+:guard_link: link:https://github.com/guard/guard[Guard]
+:hanami_link: link:https://hanamirb.org[Hanami]
+:hanamismith_link: link:https://alchemists.io/projects/hanamismith[Hanamismith]
+:htmx_link: link:https://htmx.org[htmx]
+:overmind_link: link:https://github.com/DarthSim/overmind[Overmind]
+:postgres_link: link:https://www.postgresql.org[PostgreSQL]
+
 = Hemo
+
+image:https://dl.circleci.com/status-badge/img/gh/bkuhlmann/hemo/tree/main.svg?style=svg["CircleCI", link="https://dl.circleci.com/status-badge/redirect/gh/bkuhlmann/hemo/tree/main"]
+image:https://github.com/bkuhlmann/hemo/actions/workflows/ci.yml/badge.svg[GitHub Actions, link="https://github.com/bkuhlmann/hemo/actions"]
+
+Hemo is a portmanteau (i.e. `[H]anami + D[emo] = Hemo`) which is designed to provide a fully working demo {hanami_link} application as built by the {hanamismith_link} gem.
+
+⚠️ This application is meant for _demonstration purposes only_ which means all commits are heavily link:https://alchemists.io/articles/git_rebase[rebased] as new functionality is implemented. You can _definitely_ clone this project -- and is encouraged -- but I wouldn't recommend forking this project because the SHAs will be constantly changing since each commit is meant to tell a story so people can learn how this application was architected. If you do clone (or download) a copy of this application, please note you'll have to re-clone/download with any new changes pushed to this repository.
 
 toc::[]
 
 == Features
 
+* Uses {hanamismith_link} for building the initial project skeleton and application architecture.
+* Uses modern {hanami_link} (backend) and {htmx_link} (frontend) technology to rapidly develop full featured web applications.
+* Uses modern CSS for stylesheets.
+* Provides a simple task management system for demonstration purposes where you can view, create, edit, update, and destroy tasks.
+
 == Screencasts
+
+See link:https://alchemists.io/projects/hanamismith/#_screenshotsscreencasts[Hanamismith] for details.
 
 == Requirements
 
 . link:https://www.ruby-lang.org[Ruby].
+. {postgres_link}.
+. {overmind_link} (optional but recommended).
 
 == Setup
 
@@ -27,23 +50,52 @@ bin/setup
 
 == Usage
 
-== Development
-
-To contribute, run:
-
-[source,bash]
-----
-git clone https://github.com/bkuhlmann/hemo
-cd hemo
-bin/setup
-----
-
-You can also use the IRB console for direct access to all objects:
+For access to the console, run:
 
 [source,bash]
 ----
 bin/console
 ----
+
+To view all Rake tasks, run:
+
+[source,bash]
+----
+rake -T
+----
+
+To view all Hanami CLI or CLI subcommand options, run:
+
+[source,bash]
+----
+bin/hanami -h
+bin/hanami db -h
+----
+
+To develop -- red, green, refactor -- with {guard_link}, run:
+
+[source,bash]
+----
+bin/guard
+----
+
+To launch the server, use any of the following:
+
+[source,bash]
+----
+# With Overmind (recommended)
+overmind start --procfile Procfile.dev
+
+# Without Overmind
+bin/hanami server
+----
+
+Once the server is running, you can view the app via the following URLs:
+
+- `https://localhost:2443` (secure)
+- `http://localhost:2300` (insecure)
+
+You can also check the status (health) of the app by hitting the `/up` endpoint.
 
 == Tests
 
@@ -68,5 +120,5 @@ bin/rake
 
 == Credits
 
-* Built with link:https://alchemists.io/projects/hanamismith[Hanamismith].
+* Built with {hanamismith_link}.
 * Engineered by link:https://alchemists.io/team/brooke_kuhlmann[Brooke Kuhlmann].
