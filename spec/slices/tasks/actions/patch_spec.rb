@@ -6,7 +6,7 @@ RSpec.describe Tasks::Actions::Patch, :db do
   subject(:action) { described_class.new }
 
   describe "#call" do
-    let(:task) { Test::Factory[:task] }
+    let(:task) { Factory[:task] }
 
     it "answers 200 OK status with ID only" do
       response = action.call id: task.id

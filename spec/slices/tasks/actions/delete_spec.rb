@@ -7,7 +7,7 @@ RSpec.describe Tasks::Actions::Delete, :db do
 
   describe "#call" do
     it "answers 200 OK status and blank body with valid parameters" do
-      response = action.call id: Test::Factory[:task].id
+      response = action.call id: Factory[:task].id
       expect(response).to have_attributes(status: 200, body: [""])
     end
 

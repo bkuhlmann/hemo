@@ -7,7 +7,7 @@ RSpec.describe Tasks::Actions::Index, :db do
   subject(:action) { described_class.new }
 
   describe "#call" do
-    before { Test::Factory[:task] }
+    before { Factory[:task] }
 
     it "answers 200 OK status" do
       response = action.call Hash.new

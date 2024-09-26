@@ -3,8 +3,8 @@
 require "hanami_helper"
 
 RSpec.describe "Tasks", :db, :js, :web do
-  let(:user) { Test::Factory[:user, name: "Jane Doe", email: "jdoe@example.com"] }
-  let(:task) { Test::Factory[:task, user:, description: "A test task"] }
+  let(:user) { Factory[:user, name: "Jane Doe", email: "jdoe@example.com"] }
+  let(:task) { Factory[:task, user:, description: "A test task"] }
   let(:tasks_path) { Hanami.app["routes"].path :tasks_root }
 
   it "displays no tasks when there are none" do

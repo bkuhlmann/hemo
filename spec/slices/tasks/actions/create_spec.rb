@@ -6,7 +6,7 @@ RSpec.describe Tasks::Actions::Create, :db do
   subject(:action) { described_class.new }
 
   describe "#call" do
-    let(:user) { Test::Factory[:user] }
+    let(:user) { Factory[:user] }
 
     it "answers 200 OK status with valid parameters" do
       response = action.call task: {user_id: user.id, description: "Test"}
