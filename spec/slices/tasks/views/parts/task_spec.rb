@@ -5,8 +5,8 @@ require "hanami_helper"
 RSpec.describe Tasks::Views::Parts::Task do
   subject(:part) { described_class.new value: task }
 
-  let(:task) { Test::Factory.structs[:task, id: 1, user:] }
-  let(:user) { Test::Factory.structs[:user, name: "Jane Doe"] }
+  let(:task) { Factory.structs[:task, id: 1, user:] }
+  let(:user) { Factory.structs[:user, name: "Jane Doe"] }
 
   describe "#assignee" do
     it "answers user" do

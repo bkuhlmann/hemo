@@ -6,17 +6,17 @@ RSpec.describe Tasks::Actions::Update, :db do
   subject(:action) { described_class.new }
 
   describe "#call" do
-    let(:task) { Test::Factory[:task] }
+    let(:task) { Factory[:task] }
 
     it "answers 200 OK status with user ID, description, and completed" do
-      user = Test::Factory[:user]
+      user = Factory[:user]
       response = action.call id: task.id,
                              task: {user_id: user.id, description: "Test", completed: "on"}
       expect(response.status).to eq(200)
     end
 
     it "answers 200 OK status with user ID and description only" do
-      user = Test::Factory[:user]
+      user = Factory[:user]
       response = action.call id: task.id, task: {user_id: user.id, description: "Test"}
       expect(response.status).to eq(200)
     end

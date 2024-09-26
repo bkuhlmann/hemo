@@ -4,15 +4,17 @@ require "capybara/cuprite"
 require "capybara/rspec"
 require "database_cleaner/sequel"
 require "rack/test"
+require "rom-factory"
 require "spec_helper"
 
 ENV["HANAMI_ENV"] = "test"
 
 require "hanami/prepare"
-require_relative "support/database"
-require_relative "support/factory"
 
 using Refinements::Pathname
+
+Tasks.const_set :Structs, Module.new
+Factory = ROM::Factory.configure { |config| config.rom = Tasks::Slice["db.rom"] }
 
 ENV["LD_PRELOAD"] = nil
 Capybara.app = Hanami.app
@@ -31,11 +33,9 @@ Pathname.require_tree SPEC_ROOT.join("support/factories")
 RSpec.configure do |config|
   config.include Capybara::DSL, Capybara::RSpecMatchers, :web
   config.include Rack::Test::Methods, type: :request
-  config.include Test::Database, :db
   config.include_context "with Hanami application", type: :request
 
   config.before :suite do
-    Hanami.app.start :persistence
     DatabaseCleaner[:sequel].clean_with :truncation
   end
 

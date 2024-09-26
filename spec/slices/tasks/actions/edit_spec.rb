@@ -7,7 +7,7 @@ RSpec.describe Tasks::Actions::Edit, :db do
 
   describe "#call" do
     it "answers 200 OK status with valid parameters" do
-      response = action.call id: Test::Factory[:task].id
+      response = action.call id: Factory[:task].id
       expect(response.status).to eq(200)
     end
 

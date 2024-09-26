@@ -5,7 +5,7 @@ require "hanami_helper"
 RSpec.describe Tasks::Repositories::Task, :db do
   subject(:repository) { described_class.new }
 
-  let(:task) { Test::Factory[:task] }
+  let(:task) { Factory[:task] }
 
   describe "#find" do
     it "answers record by ID" do
@@ -19,7 +19,7 @@ RSpec.describe Tasks::Repositories::Task, :db do
 
   describe "#find_by_description" do
     it "answers record by description" do
-      task = Test::Factory[:task, description: "This is a test"]
+      task = Factory[:task, description: "This is a test"]
       expect(repository.find_by_description("this")).to contain_exactly(task)
     end
 

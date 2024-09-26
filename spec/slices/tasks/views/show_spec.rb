@@ -6,8 +6,8 @@ RSpec.describe Tasks::Views::Show, :db do
   subject(:view) { described_class.new }
 
   describe "#call" do
-    let(:task) { Test::Factory.structs[:task, id: 1, user:] }
-    let(:user) { Test::Factory.structs[:user, name: "Jane Doe"] }
+    let(:task) { Factory.structs[:task, id: 1, user:] }
+    let(:user) { Factory.structs[:user, name: "Jane Doe"] }
 
     it "renders view" do
       expect(view.call(task:).to_s).to include(%(<li id="1"))
