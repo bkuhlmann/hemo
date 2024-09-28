@@ -57,9 +57,7 @@ jobs:
         run: npm install
 
       - name: Database Setup
-        run: |
-          bin/hanami db create
-          bin/hanami db migrate
+        run: bin/hanami db prepare --slice tasks
 
       - name: Build
         run: |
