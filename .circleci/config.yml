@@ -64,9 +64,7 @@ jobs:
 
       - run:
           name: Database Setup
-          command: |
-            bin/hanami db create
-            bin/hanami db migrate
+          command: bin/hanami db prepare --slice tasks
 
       - run:
           name: Build
