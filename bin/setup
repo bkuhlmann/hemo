@@ -19,8 +19,6 @@ FileUtils.chdir APP_ROOT do
   Runner.call "npm install"
 
   puts "Creating and migrating databases..."
-  Runner.call "bin/hanami db create"
-  Runner.call "bin/hanami db migrate"
-  Runner.call "HANAMI_ENV=test bin/hanami db create"
-  Runner.call "HANAMI_ENV=test bin/hanami db migrate"
+  Runner.call "bin/hanami db prepare --slice tasks"
+  Runner.call "HANAMI_ENV=test bin/hanami db prepare --slice tasks"
 end
