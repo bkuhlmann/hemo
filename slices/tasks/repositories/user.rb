@@ -2,8 +2,8 @@
 
 module Tasks
   module Repositories
-    # Defines the users repository.
-    class User < Tasks::Repository[:users]
+    # The user repository.
+    class User < DB::Repository
       commands :create, update: :by_pk, delete: :by_pk
 
       def find(id) = users.by_pk(id).one

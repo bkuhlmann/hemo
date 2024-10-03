@@ -2,11 +2,12 @@
 
 module Tasks
   module Repositories
-    # Defines the tasks repository.
-    class Task < Tasks::Repository[:tasks]
+    # The task repository.
+    class Task < DB::Repository
       ORDER = proc { created_at.asc }
 
-      commands :create, update: :by_pk, delete: :by_pk
+      # TODO: Enable once Hanami 2.2.0 supports commands.
+      # commands :create, update: :by_pk, delete: :by_pk
 
       def initialize(order: ORDER, **)
         @order = order
@@ -22,6 +23,15 @@ module Tasks
       end
 
       def all = tasks.combine(:user).order(&order).to_a
+
+      # TODO: Remove once Hanami 2.2.0 supports commands.
+      def create(attributes) = tasks.changeset(:create, attributes).commit
+
+      # TODO: Remove once Hanami 2.2.0 supports commands.
+      def update(id, **) = tasks.by_pk(id).update(**)
+
+      # TODO: Remove once Hanami 2.2.0 supports commands.
+      def delete(id, **) = tasks.by_pk(id).delete(**)
 
       private
 
